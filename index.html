@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pyropixle | Reportsystem</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #1a1a1a;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #e4e4e4;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .dark-mode .container {
+      background-color: #2c2c2c;
+    }
+
+    .header {
+      padding: 16px;
+      border-bottom: 1px solid #e5e7e8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dark-mode .header {
+      border-color: #4a4a4a;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .dark-mode .header h2 {
+      color: #e4e4e4;
+    }
+
+    .status {
+      background-color: #22c55e;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 9999px;
+    }
+
+    .dark-mode .status {
+      background-color: #16a34a;
+    }
+
+    .chat-display {
+      padding: 16px;
+      height: 300px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: #f3f4f6;
+    }
+
+    .dark-mode .chat-display {
+      background-color: #1a1a1a;
+    }
+
+    .chat-message {
+      max-width: 60%;
+      padding: 8px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .self-end {
+      align-self: flex-end;
+      background-color: #3b82f6;
+      color: #fff;
+    }
+
+    .self-start {
+      align-self: flex-start;
+      background-color: #6b7280;
+      color: #fff;
+    }
+
+    .dark-mode .self-start {
+      background-color: #4b5563;
+    }
+
+    .input-container {
+      padding: 16px;
+      border-top: 1px solid #e5e7e8;
+      display: flex;
+      gap: 8px;
+    }
+
+    .dark-mode .input-container {
+      border-color: #4a4a4a;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #e5e7e8;
+      font-size: 14px;
+    }
+
+    .dark-mode .chat-input {
+      background-color: #2c2c2c;
+      color: #e4e4e4;
+      border-color: #4a4a4a;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
+    .send-button {
+      background-color: #3b82f6;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .send-button:hover {
+      background-color: #2563eb;
+    }
+
+    .send-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #3b82f6;
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <div class="container">
+    <div class="header">
+      <h2>Baxi Reportsystem</h2>
+      <div class="status">Online</div>
+    </div>
+    <div class="chat-display" id="chatDisplay">
+    </div>
+    <div class="input-container" id="inputContainer">
+      <input
+        placeholder="Type your message..."
+        class="chat-input"
+        id="chatInput"
+        type="text"
+      />
+      <select class="chat-input" id="chatSelect" style="display:none;"></select>
+      <button class="send-button" id="sendButton">Send</button>
+    </div>
+  </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const chatDisplay = document.getElementById("chatDisplay");
+  const chatInput = document.getElementById("chatInput");
+  const chatSelect = document.getElementById("chatSelect");
+  const sendButton = document.getElementById("sendButton");
+
+  let currentQuestionId = 1;
+  let questionsData = {};
+  let reportData = {};
+  let questionAnswerHistory = [];
+
+  fetch('questions.json')
+    .then(response => response.json())
+    .then(data => {
+      questionsData = data.questions;
+      askQuestion(currentQuestionId);
+    });
+
+  sendButton.addEventListener("click", function() {
+    let userInput;
+
+    if (chatSelect.style.display === 'none') {
+      userInput = chatInput.value.trim();
+    } else {
+      userInput = chatSelect.value;
+    }
+
+    if (userInput) {
+      addMessage(userInput, 'self-end');
+      processAnswer(userInput);
+      chatInput.value = '';
+    }
+  });
+
+  function addMessage(text, className) {
+    const messageElement = document.createElement('div');
+    messageElement.className = `chat-message ${className}`;
+    messageElement.textContent = text;
+    chatDisplay.appendChild(messageElement);
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
+  }
+
+  function askQuestion(questionId) {
+    const question = questionsData.find(q => q.id === questionId);
+    if (question) {
+      currentQuestionId = questionId;
+      let questionText = question.question;
+
+      if (reportData.name) {
+        questionText = questionText.replace("[name]", reportData.name);
+      }
+
+      addMessage(questionText, 'self-start');
+
+      if (question.dropdown) {
+        showDropdown(question.dropdown);
+      } else {
+        showInputField();
+      }
+    }
+  }
+
+  function showDropdown(options) {
+    chatInput.style.display = 'none';
+    chatSelect.style.display = 'block';
+    chatSelect.innerHTML = options.map(option => `<option value="${option}">${option}</option>`).join('');
+  }
+
+  function showInputField() {
+    chatInput.style.display = 'block';
+    chatSelect.style.display = 'none';
+  }
+
+  function processAnswer(answer) {
+    const currentQuestion = questionsData.find(q => q.id === currentQuestionId);
+    questionAnswerHistory.push({ questionId: currentQuestionId, answer: answer });
+
+    if (currentQuestion.id === 1) {
+      reportData.name = answer;
+    }
+
+    let nextQuestionId = currentQuestion.defaultNextQuestion || null;
+
+    if (currentQuestion.keywords) {
+      for (const keyword in currentQuestion.keywords) {
+        const keywordLowerCase = keyword.toLowerCase();
+        const answerLowerCase = answer.toLowerCase();
+
+        if (answerLowerCase.includes(keywordLowerCase) || isSimilar(answerLowerCase, keywordLowerCase)) {
+          nextQuestionId = currentQuestion.keywords[keyword];
+          break;
+        }
+      }
+    }
+
+    const instadirectKeyword = "instadirect";
+    if (answer.toLowerCase() === instadirectKeyword) {
+      nextQuestionId = currentQuestion.defaultNextQuestion;
+    }
+
+    if (nextQuestionId) {
+      askQuestion(nextQuestionId);
+    } else if (currentQuestion.end) {
+      addMessage("End of report. Thank you!", 'self-start');
+      alert(JSON.stringify(questionAnswerHistory, null, 2));
+    }
+  }
+
+  function isSimilar(answer, keyword) {
+    const answerWords = answer.split(' ');
+    for (const word of answerWords) {
+      if (word.startsWith(keyword)) {
+        return true;
+      }
+    }
+    return false;
+  }
+});
+</script>
+</html>
