@@ -2,74 +2,139 @@
     "questions": [
         {
             "id": 1,
-            "question": "What would you like to report?",
-            "dropdown": ["user", "bot", "bug"],
+            "question": "Welcome! How can I assist you today?",
+            "dropdown": ["Technical Support", "Account Maintenance", "General Questions", "Feedback"],
             "keywords": {
-                "user": 2
+                "Technical Support": 2,
+                "Account Maintenance": 3,
+                "General Questions": 4,
+                "Feedback": 5
             }
         },
         {
             "id": 2,
-            "question": "Which person would you like to report? Please give me the user ID.",
-            "defaultNextQuestion": 4,
-            "keywords": {}
+            "question": "What type of technical support do you need?",
+            "dropdown": ["Error Reporting", "Installation", "Update", "Other"],
+            "keywords": {
+                "Error Reporting": 6,
+                "Installation": 7,
+                "Update": 8,
+                "Other": 9
+            }
         },
         {
             "id": 3,
-            "question": "Why do you want to report this user? (Short answer)",
-            "dropdown": ["insult", "threats", "spamming", "cyberbullying", "other"],
+            "question": "What type of account maintenance do you need?",
+            "dropdown": ["Reset Password", "Change Account Information", "Delete Account", "Other"],
             "keywords": {
-                "insult": 4,
-                "threats": 5,
-                "spamming": 6,
-                "cyberbullying": 5,
-                "other": 7
+                "Reset Password": 10,
+                "Change Account Information": 11,
+                "Delete Account": 12,
+                "Other": 13
             }
         },
         {
             "id": 4,
-            "question": "Have you had previous conflicts with this user?",
-            "dropdown": ["yes", "no"],
-            "keywords": {
-                "yes": 8,
-                "no":9
-            }
+            "question": "Please specify your general inquiry:",
+            "defaultNextQuestion": 14,
+            "keywords": {}
         },
         {
             "id": 5,
-            "question": "Do you need psychological support? If your answer is yes, one of our team will contact you as soon as possible to support you during this time.",
-            "dropdown": ["yes", "no"],
+            "question": "Thank you for your feedback! Would you like to add anything else?",
+            "dropdown": ["Yes", "No"],
             "keywords": {
-                "yes": 4,
-                "no": 4
+                "Yes": 15,
+                "No": 16
             }
         },
         {
             "id": 6,
-            "question": "How often have you been spammed by this person at the current time?",
-            "defaultNextQuestion": 4,
+            "question": "Please describe the issue you are experiencing with error reporting:",
+            "defaultNextQuestion": 17,
             "keywords": {}
         },
         {
             "id": 7,
-            "question": "Could you please describe in keywords what the person does / has done?",
-            "defaultNextQuestion": 4,
-            "keywords": {}
+            "question": "What type of installation assistance do you need?",
+            "dropdown": ["Software", "Hardware", "Network", "Other"],
+            "keywords": {
+                "Software": 18,
+                "Hardware": 19,
+                "Network": 20,
+                "Other": 21
+            }
         },
         {
             "id": 8,
-            "question": "Please briefly describe the previous conflicts with the person.",
-            "defaultNextQuestion": 4,
-            "keywords": {}
+            "question": "Which update is related to your issue?",
+            "dropdown": ["System", "Application", "Security", "Other"],
+            "keywords": {
+                "System": 22,
+                "Application": 23,
+                "Security": 24,
+                "Other": 25
+            }
         },
         {
             "id": 9,
-            "question": "Can you share any screenshots, videos, or links to the relevant messages/channels?",
-            "dropdown": ["yes", "no"],
+            "question": "Please describe the other technical issue you are facing:",
+            "defaultNextQuestion": 17,
+            "keywords": {}
+        },
+        {
+            "id": 10,
+            "question": "Please provide your email address for password reset:",
+            "defaultNextQuestion": 17,
+            "keywords": {}
+        },
+        {
+            "id": 11,
+            "question": "What account information would you like to change?",
+            "defaultNextQuestion": 17,
+            "keywords": {}
+        },
+        {
+            "id": 12,
+            "question": "Please confirm the deletion of your account:",
+            "dropdown": ["Confirm", "Cancel"],
             "keywords": {
-                "yes": 10,
-                "no": 11
+                "Confirm": 17,
+                "Cancel": 17
             }
+        },
+        {
+            "id": 13,
+            "question": "Please describe your other account maintenance concern:",
+            "defaultNextQuestion": 17,
+            "keywords": {}
+        },
+        {
+            "id": 14,
+            "question": "Do you have any other questions?",
+            "dropdown": ["Yes", "No"],
+            "keywords": {
+                "Yes": 1,
+                "No": 17
+            }
+        },
+        {
+            "id": 15,
+            "question": "Please provide any additional information or comments you have:",
+            "defaultNextQuestion": 17,
+            "keywords": {}
+        },
+        {
+            "id": 16,
+            "question": "Thank you for your feedback! If you have any further questions, feel free to ask.",
+            "defaultNextQuestion": 17,
+            "keywords": {}
+        },
+        {
+            "id": 17,
+            "question": "Thank you for your inquiry! If you need further assistance, please let me know.",
+            "end": true,
+            "keywords": {}
         }
     ]
 }
