@@ -2,7 +2,7 @@
     "questions": [
         {
             "id": 1,
-            "question": "Welcome! How can I assist you today?",
+            "question": "Welcome! How can I assist you today? ",
             "dropdown": ["Technical Support", "Account Maintenance", "General Questions", "Feedback"],
             "keywords": {
                 "Technical Support": 2,
