@@ -2,139 +2,221 @@
     "questions": [
         {
             "id": 1,
-            "question": "Welcome! How can I assist you today? ",
-            "dropdown": ["Technical Support", "Account Maintenance", "General Questions", "Feedback"],
+            "question": "What would you like to report?",
+            "dropdown": ["user", "bot", "bug", "message"],
             "keywords": {
-                "Technical Support": 2,
-                "Account Maintenance": 3,
-                "General Questions": 4,
-                "Feedback": 5
+                "user": 102,
+                "bot": 201,
+                "bug": 301,
+                "message": 401
             }
         },
         {
-            "id": 2,
-            "question": "What type of technical support do you need?",
-            "dropdown": ["Error Reporting", "Installation", "Update", "Other"],
+            "id": 102,
+            "question": "Which person would you like to report? Please give me the user ID.",
+            "defaultNextQuestion": 103,
+            "keywords": {}
+        },
+        {
+            "id": 103,
+            "question": "Why do you want to report this user? (Short answer)",
+            "dropdown": ["insult", "threats", "spamming", "cyberbullying", "other"],
             "keywords": {
-                "Error Reporting": 6,
-                "Installation": 7,
-                "Update": 8,
-                "Other": 9
+                "insult": 104,
+                "threats": 105,
+                "spamming": 106,
+                "cyberbullying": 105,
+                "other": 107
             }
         },
         {
-            "id": 3,
-            "question": "What type of account maintenance do you need?",
-            "dropdown": ["Reset Password", "Change Account Information", "Delete Account", "Other"],
+            "id": 104,
+            "question": "Have you had previous conflicts with this user?",
+            "dropdown": ["yes", "no"],
             "keywords": {
-                "Reset Password": 10,
-                "Change Account Information": 11,
-                "Delete Account": 12,
-                "Other": 13
+                "yes": 108,
+                "no":109
             }
         },
         {
-            "id": 4,
-            "question": "Please specify your general inquiry:",
-            "defaultNextQuestion": 14,
-            "keywords": {}
-        },
-        {
-            "id": 5,
-            "question": "Thank you for your feedback! Would you like to add anything else?",
-            "dropdown": ["Yes", "No"],
+            "id": 105,
+            "question": "Do you need psychological support? If your answer is yes, one of our team will contact you as soon as possible to support you during this time.",
+            "dropdown": ["yes", "no"],
             "keywords": {
-                "Yes": 15,
-                "No": 16
+                "yes": 104,
+                "no": 104
             }
         },
         {
-            "id": 6,
-            "question": "Please describe the issue you are experiencing with error reporting:",
-            "defaultNextQuestion": 17,
+            "id": 106,
+            "question": "How often have you been spammed by this person at the current time?",
+            "defaultNextQuestion": 104,
             "keywords": {}
         },
         {
-            "id": 7,
-            "question": "What type of installation assistance do you need?",
-            "dropdown": ["Software", "Hardware", "Network", "Other"],
+            "id": 107,
+            "question": "Could you please describe in keywords what the person does / has done?",
+            "defaultNextQuestion": 104,
+            "keywords": {}
+        },
+        {
+            "id": 108,
+            "question": "Please briefly describe the previous conflicts with the person.",
+            "defaultNextQuestion": 109,
+            "keywords": {}
+        },
+        {
+            "id": 109,
+            "question": "Can you share any screenshots or videos to the relevant messages/channels?",
+            "dropdown": ["yes", "no"],
             "keywords": {
-                "Software": 18,
-                "Hardware": 19,
-                "Network": 20,
-                "Other": 21
+                "yes": 110,
+                "no": 999
             }
         },
         {
-            "id": 8,
-            "question": "Which update is related to your issue?",
-            "dropdown": ["System", "Application", "Security", "Other"],
+            "id": 110,
+            "question": "Let's go then! Send me the files so that we can take a look at them.",
+            "imageinput": "File upload",
+            "defaultNextQuestion": 999
+        },
+
+
+
+
+
+
+
+        {
+            "id": 201,
+            "question": "Why do you want to report this bot?",
+            "dropdown": ["Spam-Bot", "Raid-Bot", "Phishing-Bot", "Data collector", "Scam-Bot", "other"],
             "keywords": {
-                "System": 22,
-                "Application": 23,
-                "Security": 24,
-                "Other": 25
+                "Spam-Bot": 202,
+                "Raid-Bot": 202,
+                "Phishing-Bot": 202,
+                "Data collector": 202,
+                "Scam-Bot": 202,
+                "other": 203
             }
         },
         {
-            "id": 9,
-            "question": "Please describe the other technical issue you are facing:",
-            "defaultNextQuestion": 17,
+            "id": 202,
+            "question": "Please describe in more detail what happened so that you can report the bot here. (How does the bot proceed? What does it do?, ...)",
+            "defaultNextQuestion": 204,
             "keywords": {}
         },
         {
-            "id": 10,
-            "question": "Please provide your email address for password reset:",
-            "defaultNextQuestion": 17,
+            "id": 203,
+            "question": "Please explain in brief what the bot does so that you can report it here.",
+            "defaultNextQuestion": 202,
             "keywords": {}
         },
         {
-            "id": 11,
-            "question": "What account information would you like to change?",
-            "defaultNextQuestion": 17,
-            "keywords": {}
-        },
-        {
-            "id": 12,
-            "question": "Please confirm the deletion of your account:",
-            "dropdown": ["Confirm", "Cancel"],
+            "id": 204,
+            "question": "Have there already been incidents with the bot?",
+            "dropdown": ["yes", "no", "I don't know"],
             "keywords": {
-                "Confirm": 17,
-                "Cancel": 17
+                "yes": 205,
+                "no": 205,
+                "I don't know": 205
             }
         },
         {
-            "id": 13,
-            "question": "Please describe your other account maintenance concern:",
-            "defaultNextQuestion": 17,
-            "keywords": {}
-        },
-        {
-            "id": 14,
-            "question": "Do you have any other questions?",
-            "dropdown": ["Yes", "No"],
+            "id": 205,
+            "question": "Can you share any screenshots or videos to the relevant messages/channels?",
+            "dropdown": ["yes", "no"],
             "keywords": {
-                "Yes": 1,
-                "No": 17
+                "yes": 206,
+                "no": 999
             }
         },
         {
-            "id": 15,
-            "question": "Please provide any additional information or comments you have:",
-            "defaultNextQuestion": 17,
+            "id": 206,
+            "question": "Let's go then! Send me the files so that we can take a look at them.",
+            "imageinput": "File upload",
+            "defaultNextQuestion": 999
+        },
+
+
+
+
+
+        {
+            "id": 301,
+            "question": "What kind of bug have you encountered?",
+            "dropdown": ["System not working", "Unexpected behavior", "Translation error", "other"],
+            "keywords": {
+                "System not working": 302,
+                "Unexpected behavior": 303,
+                "Translation error": 307,
+                "other": 304
+            }
+        },
+        {
+            "id": 302,
+            "question": "Which system are you talking about?",
+            "dropdown": ["Anti Raid", "Guessing game", "Counting game", "Globalchat", "Welcome", "Verify", "Suggestion", "Ticket", "Log", "Security"],
+            "keywords": {
+                "Anti Raid": 305,
+                "Guessing game": 305,
+                "Counting game": 305,
+                "Globalchat": 305,
+                "Welcome": 305,
+                "Verify": 305,
+                "Suggestion": 305,
+                "Ticket": 305,
+                "Log": 305,
+                "Security": 305
+            }
+        },
+        {
+            "id": 303,
+            "question": "What did the system do wrong?",
+            "defaultNextQuestion": 302,
             "keywords": {}
         },
         {
-            "id": 16,
-            "question": "Thank you for your feedback! If you have any further questions, feel free to ask.",
-            "defaultNextQuestion": 17,
+            "id": 304,
+            "question": "Which bug would you like to report? Just two keywords please.",
+            "defaultNextQuestion": 302,
             "keywords": {}
         },
         {
-            "id": 17,
-            "question": "Thank you for your inquiry! If you need further assistance, please let me know.",
-            "end": true,
+            "id": 305,
+            "question": "What exactly happened that made you fill out this bug report?",
+            "defaultNextQuestion": 306,
             "keywords": {}
+        },
+        {
+            "id": 306,
+            "question": "Explain step by step what you have done so that we can reproduce/find the error.",
+            "defaultNextQuestion": 999,
+            "keywords": {}
+        },
+        {
+            "id": 307,
+            "question": "Which system are you talking about?",
+            "dropdown": ["Anti Raid", "Guessing game", "Counting game", "Globalchat", "Welcome", "Verify", "Suggestion", "Ticket", "Log", "Security"],
+            "keywords": {
+                "Anti Raid": 306,
+                "Guessing game": 306,
+                "Counting game": 306,
+                "Globalchat": 306,
+                "Welcome": 306,
+                "Verify": 306,
+                "Suggestion": 306,
+                "Ticket": 306,
+                "Log": 306,
+                "Security": 365
+            }
+        },
+
+
+        {
+            "id": 999,
+            "question": "That's it for my questions. Thank you for your report. Our team will look at my summary of the chat history and take action if necessary. If we have any further questions, we will contact you via Discord or email.",
+            "end": true
         }
     ]
 }
